@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OddTwitterStreamer", "OddTwitterStreamer\OddTwitterStreamer.csproj", "{021CEDDF-3B54-4518-B402-E91F50681F17}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A5ECFF04-D3E7-442B-9BF8-D26EBF5E15B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{021CEDDF-3B54-4518-B402-E91F50681F17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{021CEDDF-3B54-4518-B402-E91F50681F17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{021CEDDF-3B54-4518-B402-E91F50681F17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5ECFF04-D3E7-442B-9BF8-D26EBF5E15B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5ECFF04-D3E7-442B-9BF8-D26EBF5E15B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5ECFF04-D3E7-442B-9BF8-D26EBF5E15B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5ECFF04-D3E7-442B-9BF8-D26EBF5E15B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

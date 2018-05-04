@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  oddtwitterstreamer:
+    image: oddtwitterstreamer
+    build:
+      context: .\OddTwitterStreamer
+      dockerfile: Dockerfile

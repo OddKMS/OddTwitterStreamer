@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nito.AsyncEx;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,13 @@ namespace OddTwitterStreamer
     {
         static void Main(string[] args)
         {
+            //async entrypoint
+            AsyncContext.Run(() => MainAsync(args));
+        }
+
+        static async Task MainAsync(string[] args)
+        {
+
         }
     }
 }

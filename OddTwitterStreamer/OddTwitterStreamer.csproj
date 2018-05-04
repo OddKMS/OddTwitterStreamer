@@ -70,9 +70,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\TweetConsumer.cs" />
+    <Compile Include="Classes\TweetGetter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestConsumer.cs" />
+    <Compile Include="Classes\RequestConsumer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".dockerignore">

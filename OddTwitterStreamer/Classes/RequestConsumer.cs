@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace OddTwitterStreamer
+namespace OddTwitterStreamer.Classes
 {
+    /// <summary>
+    /// Helper class to make REST requests and get the result
+    /// </summary>
     public class RequestConsumer
     {
         public async Task<Stream> GetRequestContentStreamAsync(Uri requestUri)

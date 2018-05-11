@@ -159,6 +159,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\TweetSpeaker.cs" />
+    <Compile Include="Interfaces\ITweetHandler.cs" />
     <Compile Include="Interfaces\ITweetStreamer.cs" />
     <Compile Include="Classes\TweetStreamer.cs" />
     <Compile Include="NinjectBindings.cs" />

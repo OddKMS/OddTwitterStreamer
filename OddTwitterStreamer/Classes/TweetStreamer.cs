@@ -38,7 +38,7 @@ namespace OddTwitterStreamer.Classes
 
             tweetStream.TweetReceived += (sender, args) =>
             {
-                Console.WriteLine(args.Tweet);
+                Console.WriteLine(args.Tweet.CreatedBy.ScreenName + ": " + args.Tweet);
             };
 
             await tweetStream.StartStreamAsync();
@@ -69,7 +69,7 @@ namespace OddTwitterStreamer.Classes
 
             filteredStream.MatchingTweetReceived += (sender, args) =>
             {
-                Console.WriteLine(args.Tweet);
+                Console.WriteLine(args.Tweet.CreatedBy.ScreenName + ": " + args.Tweet);
             };
 
             await filteredStream.StartStreamMatchingAnyConditionAsync();

@@ -26,6 +26,7 @@ namespace OddTwitterStreamer
             //Safety measure, you mess up decimal annotations only once.
             CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("NO");
             Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             _kernel = new StandardKernel();
             var bindings = new NinjectBindings();
             bindings.Load(_kernel);

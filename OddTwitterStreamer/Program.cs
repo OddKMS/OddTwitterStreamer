@@ -31,10 +31,20 @@ namespace OddTwitterStreamer
 
             //Main class for the program, as I'm partial to doing as little as possible in Main()
             _tweetStreamer = _kernel.Get<TweetStreamer>();
+            
+            foreach (string argument in args)
+            {
+                switch (argument)
+                {
+                    case "-filter":
+                        await _tweetStreamer.StreamFilteredTweets();
+                        break;
 
-            //Kicks off the business logic
-            await _tweetStreamer.StreamTweets();
-
+                    default:
+                        await _tweetStreamer.StreamSampleTweets();
+                        break;
+                }
+            }
         }
     }
 }

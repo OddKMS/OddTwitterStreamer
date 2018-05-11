@@ -1,8 +1,5 @@
 ﻿using OddTwitterStreamer.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Tweetinvi;
 using Newtonsoft.Json;
@@ -14,13 +11,50 @@ namespace OddTwitterStreamer.Classes
 {
     public class TweetStreamer : ITweetStreamer
     {
-        public async Task StreamTweets()
+        Subject<TweetAsync> _tweets;
+
+        public async Task StreamSampleTweets()
         {
-            //Step 1: 
+            await Configure();
+            
+            //Creates a stream that outputs 1% of all tweets worldwide (made in english) to the console.
+            var tweetStream = Tweetinvi.Stream.CreateSampleStream();
+            tweetStream.AddTweetLanguageFilter(LanguageFilter.Norwegian);
+
+            tweetStream.TweetReceived += (sender, args) =>
+            {
+                Console.WriteLine(args.Tweet);
+            };
+
+            await tweetStream.StartStreamAsync();
+
+            //TODO: Create separate handler, use Reacive Extensions
+            //To do something fun with the tweets
+            //Maybe we can read them with text-to-speech?
+        }
+
+
+        public async Task StreamFilteredTweets()
+        {
+            await Configure();
+
+            var filteredStream = Tweetinvi.Stream.CreateFilteredStream();
+            filteredStream.AddTweetLanguageFilter(LanguageFilter.Norwegian);
+            filteredStream.AddTrack("Eurovision");
+
+            filteredStream.MatchingTweetReceived += (sender, args) =>
+            {
+                Console.WriteLine(args.Tweet);
+            };
+
+            await filteredStream.StartStreamMatchingAnyConditionAsync();
+        }
+
+        private async Task Configure()
+        {
             //Get Credentials
             var credentials = await GetCredentialsFromFile();
 
-            //Step 2: 
             //Set Credentials for the thread (and child-threads?)
             Auth.SetCredentials(credentials);
 
@@ -28,27 +62,6 @@ namespace OddTwitterStreamer.Classes
             //Thus we use Tweetinvi's automatic rate limiter
             //Also preferable because it's easy and we're using async methods anyway
             RateLimit.RateLimitTrackerMode = RateLimitTrackerMode.TrackAndAwait;
-
-            //For the purpose of this program we will not be getting authentication from any user
-            //in order to retrieve tweets, but will use my test account's user credentials
-
-            //Gets the user form current thread credentials
-            var authenticatedUser = User.GetAuthenticatedUser();
-
-            //Step 3:
-            //Creates a stream that outputs 1% of all tweets worldwide (made in english) to the console.
-            var stream = Tweetinvi.Stream.CreateSampleStream(credentials);
-            stream.AddTweetLanguageFilter(LanguageFilter.English);
-
-            stream.TweetReceived += (sender, args) =>
-            {
-                Console.WriteLine(args.Tweet);
-            };
-
-            await stream.StartStreamAsync();
-
-            //Step 2: Do something with the tweets
-            //Maybe we can read them with text-to-speech?
         }
 
         /// <summary>
@@ -62,8 +75,13 @@ namespace OddTwitterStreamer.Classes
             using (StreamReader jsonFile = File.OpenText(@"key.secure.json"))
             {
                 var jsonString = await jsonFile.ReadToEndAsync();
-                var definition = new { ApiKey = "", ApiSecret = "",
-                                        AccessToken = "", AccessTokenSecret ="" };
+                var definition = new
+                {
+                    ApiKey = "",
+                    ApiSecret = "",
+                    AccessToken = "",
+                    AccessTokenSecret = ""
+                };
 
                 var jsonContent = JsonConvert.DeserializeAnonymousType(jsonString, definition);
 

@@ -4,6 +4,7 @@ namespace OddTwitterStreamer.Interfaces
 {
     public interface ITweetStreamer
     {
-        Task StreamTweets();
+        Task StreamSampleTweets();
+        Task StreamFilteredTweets();
     }
 }

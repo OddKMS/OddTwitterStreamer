@@ -5,19 +5,11 @@ using Tweetinvi;
 using Newtonsoft.Json;
 using System.IO;
 using Tweetinvi.Models;
-using System.Reactive.Subjects;
-using System.Linq;
 
 namespace OddTwitterStreamer.Classes
 {
     public class TweetStreamer : ITweetStreamer
     {
-        Subject<TweetAsync> _tweets;
-
-        public TweetStreamer()
-        {
-
-        }
 
         public async Task StreamSampleTweets()
         {
@@ -32,9 +24,9 @@ namespace OddTwitterStreamer.Classes
             RateLimit.RateLimitTrackerMode = RateLimitTrackerMode.TrackAndAwait;
 
             //Creates a stream that outputs 1% of all tweets worldwide (made in english) to the console.
-            var tweetStream = Tweetinvi.Stream.CreateSampleStream(credentials);
+            var tweetStream = Tweetinvi.Stream.CreateSampleStream();
 
-            tweetStream.AddTweetLanguageFilter(LanguageFilter.Norwegian);
+            tweetStream.AddTweetLanguageFilter(LanguageFilter.English);
 
             tweetStream.TweetReceived += (sender, args) =>
             {

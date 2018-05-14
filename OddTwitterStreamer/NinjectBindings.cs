@@ -9,6 +9,7 @@ namespace OddTwitterStreamer
         public void Load(IKernel kernel)
         {
             kernel.Bind<ITweetStreamer>().To<TweetStreamer>().InSingletonScope();
+            kernel.Bind<ITweetHandler>().To<TweetToConsole>();
         }
     }
 }

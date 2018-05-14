@@ -160,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\TweetSpeaker.cs" />
+    <Compile Include="Classes\TweetToConsole.cs" />
     <Compile Include="Interfaces\ITweetHandler.cs" />
     <Compile Include="Interfaces\ITweetStreamer.cs" />
     <Compile Include="Classes\TweetStreamer.cs" />

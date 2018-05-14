@@ -5,11 +5,24 @@ using Tweetinvi;
 using Newtonsoft.Json;
 using System.IO;
 using Tweetinvi.Models;
+using Ninject;
 
 namespace OddTwitterStreamer.Classes
 {
     public class TweetStreamer : ITweetStreamer
     {
+        ITweetHandler _tweetHandler;
+        IKernel _kernel;
+
+        public TweetStreamer()
+        {
+            _kernel = new StandardKernel();
+            var bindings = new NinjectBindings();
+            bindings.Load(_kernel);
+
+            //Gets the handler we've bound in NinjectBindings
+            _tweetHandler = _kernel.Get<ITweetHandler>();
+        }
 
         public async Task StreamSampleTweets()
         {
@@ -30,7 +43,7 @@ namespace OddTwitterStreamer.Classes
 
             tweetStream.TweetReceived += (sender, args) =>
             {
-                Console.WriteLine(args.Tweet.CreatedBy.ScreenName + ": " + args.Tweet);
+                _tweetHandler.HandleTweet(args.Tweet);
             };
 
             await tweetStream.StartStreamAsync();
@@ -61,7 +74,7 @@ namespace OddTwitterStreamer.Classes
 
             filteredStream.MatchingTweetReceived += (sender, args) =>
             {
-                Console.WriteLine(args.Tweet.CreatedBy.ScreenName + ": " + args.Tweet);
+                _tweetHandler.HandleTweet(args.Tweet);
             };
 
             await filteredStream.StartStreamMatchingAnyConditionAsync();
